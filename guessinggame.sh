@@ -2,15 +2,18 @@ function guessinggame {
 	echo "How many files do you think are in the current directory? Enter a number:"
 	while read response
 	do
-		if [[ response -eq "3" ]]
+		if [[ response -eq $(ls | wc -l) ]]
 		then
 			echo "Congratulations."
 			break
 		else
 			echo
-			if [[ ! response -eq "3" ]]
+			if [[ response -lt $(ls | wc -l) ]]
 			then
-				echo "Guess again."
+				echo "Too low. Guess again."
+			elif [[ response -gt $(ls | wc -l) ]]
+			then
+				echo "Too high. Guess again."
 			fi
 		fi
 	done
